@@ -11,6 +11,12 @@ def index():
         result.append(p.serialize())
     return jsonify(result)
 
+@bp.route('/<int:id>', methods=['GET'])
+def show(id: int):
+    p = Patient.query.get_or_404(id)
+    return jsonify(p.serialize())
+
+
 @bp.route('', methods=['POST'])
 def create():
     if 'name' not in request.json and 'date_of_birth' not in request.json and 'phone_number' not in request.json:
@@ -20,8 +26,8 @@ def create():
         date_of_birth=request.json['date_of_birth'],
         phone_number=request.json['phone_number'],
         email=request.json['email']
-        #cl_rx=request.json['cl_rx'],
-        #s_rx=request.json['s_rx']'''
+        cl_rx=request.json['cl_rx'],
+        s_rx=request.json['s_rx']
     )
     db.session.add(p)
     db.session.commit()
