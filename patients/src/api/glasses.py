@@ -9,10 +9,10 @@ def create():
         return abort(400)
     Patient.query.get_or_404(request.json['patient_id'])
     g = Glasses_Rx(
-        valid=True,
-        prescription= 'R -3.00 /L -4.50',
-        pres_od='Von Dutch, OD',
-        patient_id=1
+        valid=request.json['valid'],
+        prescription=request.json['prescription'],
+        pres_od=request.json['pres_od'],
+        patient_id=request.json['patient_id']
     )
     db.session.add(g)
     db.session.commit()
