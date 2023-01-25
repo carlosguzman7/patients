@@ -7,8 +7,8 @@ bp = Blueprint('glasses', __name__, url_prefix='/glasses')
 def create():
     if 'patient_id' not in request.json or 'prescription' not in request.json:
         return abort(400)
-    Patient.query.get_or_404(request.json['patient_id'])
     g = Glasses_Rx(
+        exp_date=request.json['exp_date'],
         valid=request.json['valid'],
         prescription=request.json['prescription'],
         pres_od=request.json['pres_od'],
