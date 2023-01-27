@@ -23,9 +23,9 @@ def upgrade():
     sa.Column('exp_date', sa.DateTime(), nullable=False),
     sa.Column('valid', sa.Boolean(), nullable=False),
     sa.Column('lens_brand', sa.String(), nullable=False),
-    sa.Column('prescription', sa.Integer(), nullable=False),
+    sa.Column('prescription', sa.String(), nullable=False),
     sa.Column('pres_od', sa.String(), nullable=False),
-    sa.Column('patient_id', sa.Integer(), nullable=False),
+    sa.Column('patients_id', sa.Integer(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###

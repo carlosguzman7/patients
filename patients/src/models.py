@@ -11,8 +11,8 @@ class Patient(db.Model):
     date_of_birth = db.Column(db.DateTime, default=datetime.date, unique=False, nullable=False)
     phone_number = db.Column(db.Integer, unique=False, nullable=False)
     email = db.Column(db.String(40), unique=False, nullable=True)
-    #current_clrx = db.relationship('contacts_rx_id', backref='patient')
-    #current_srx = db.relationship('glasses_rx_id', backref='patient')
+    current_clrx = db.relationship('Contacts_Rx', backref='patient')
+    current_srx = db.relationship('Glasses_Rx', backref='patient')
 
     def __init__(self, name: str, date_of_birth: datetime, phone_number: int, email: str): #cl_rx: int, #s_rx: int
         self.name = name
@@ -46,16 +46,16 @@ class Glasses_Rx(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     exp_date = db.Column(db.DateTime, default=datetime.date, nullable=False)
     valid = db.Column(db.Boolean, nullable=False)
-    prescription = db.Column(db.Integer, nullable=False)
+    prescription = db.Column(db.String, nullable=False)
     pres_od = db.Column(db.String, nullable=False)
-    patient_id = db.Column(db.Integer, db.ForeignKey('patients.id'), nullable=False)
+    patients_id = db.Column(db.Integer, db.ForeignKey('patients.id'), nullable=False)
 
-    def __init__(self, exp_date: datetime, valid: bool, prescription: str, pres_od: str, patient_id: int):
+    def __init__(self, exp_date: datetime, valid: bool, prescription: str, pres_od: str, patients_id: int):
         self.exp_date = exp_date
         self.valid = valid
         self.prescription = prescription
         self.pres_od = pres_od
-        self.patient_id = patient_id
+        self.patients_id = patients_id
 
     def serialize(self):
         return {
@@ -64,7 +64,7 @@ class Glasses_Rx(db.Model):
             'valid': self.valid,
             'prescription': self.prescription,
             'pres_od': self.pres_od,
-            'patient_id': self.patient_id
+            'patients_id': self.patients_id
         }
 
 
@@ -77,7 +77,7 @@ class Contacts_Rx(db.Model):
     prescription = db.Column(db.Integer, nullable=False)
     pres_od = db.Column(db.String, nullable=False)
     patient_id = db.Column(db.Integer, db.ForeignKey('patients.id'), nullable=False)
-    
+
     def __init__(self, exp_date: datetime, valid: bool, lens_brand: str, prescription: str, pres_od: str, patient_id: str):
         self.exp_date = exp_date
         self.valid = valid

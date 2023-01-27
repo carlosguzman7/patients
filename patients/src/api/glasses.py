@@ -5,14 +5,15 @@ bp = Blueprint('glasses', __name__, url_prefix='/glasses')
 
 @bp.route('', methods=['POST'])
 def create():
-    if 'patient_id' not in request.json or 'prescription' not in request.json:
+    if 'patients_id' not in request.json or 'prescription' not in request.json:
         return abort(400)
+    Patient.query.get_or_404(request.json['patients_id'])    
     g = Glasses_Rx(
         exp_date=request.json['exp_date'],
         valid=request.json['valid'],
         prescription=request.json['prescription'],
         pres_od=request.json['pres_od'],
-        patient_id=request.json['patient_id']
+        patients_id=request.json['patients_id']
     )
     db.session.add(g)
     db.session.commit()
