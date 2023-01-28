@@ -74,7 +74,7 @@ class Contacts_Rx(db.Model):
     exp_date = db.Column(db.DateTime, default=datetime.date, nullable=False)
     valid = db.Column(db.Boolean, nullable=False)
     lens_brand = db.Column(db.String, nullable=False)
-    prescription = db.Column(db.Integer, nullable=False)
+    prescription = db.Column(db.String, nullable=False)
     pres_od = db.Column(db.String, nullable=False)
     patient_id = db.Column(db.Integer, db.ForeignKey('patients.id'), nullable=False)
 

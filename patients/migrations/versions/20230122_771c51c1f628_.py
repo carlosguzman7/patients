@@ -21,7 +21,7 @@ def upgrade():
     with op.batch_alter_table('patients', schema=None) as batch_op:
         batch_op.alter_column('phone_number',
                existing_type=sa.BIGINT(),
-               type_=sa.Integer(),
+               type_=sa.BIGINT(),
                existing_nullable=False)
 
     # ### end Alembic commands ###
