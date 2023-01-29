@@ -46,15 +46,17 @@ class Glasses_Rx(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     exp_date = db.Column(db.DateTime, default=datetime.date, nullable=False)
     valid = db.Column(db.Boolean, nullable=False)
-    prescription = db.Column(db.String, nullable=False)
-    pres_od = db.Column(db.String, nullable=False)
+    od_rx = db.Column(db.String, nullable=True)
+    os_rx = db.Column(db.String, nullable=True)
+    pres_doc = db.Column(db.String, nullable=False)
     patients_id = db.Column(db.Integer, db.ForeignKey('patients.id'), nullable=False)
 
-    def __init__(self, exp_date: datetime, valid: bool, prescription: str, pres_od: str, patients_id: int):
+    def __init__(self, exp_date: datetime, valid: bool, od_rx: str, os_rx: str, pres_doc: str, patients_id: int):
         self.exp_date = exp_date
         self.valid = valid
-        self.prescription = prescription
-        self.pres_od = pres_od
+        self.od_rx = od_rx
+        self.os_rx = os_rx
+        self.pres_doc = pres_doc
         self.patients_id = patients_id
 
     def serialize(self):
@@ -62,8 +64,9 @@ class Glasses_Rx(db.Model):
             'id': self.id,
             'exp_date': self.exp_date,
             'valid': self.valid,
-            'prescription': self.prescription,
-            'pres_od': self.pres_od,
+            'od_rx': self.od_rx,
+            'os_rx': self.os_rx,
+            'pres_doc': self.pres_doc,
             'patients_id': self.patients_id
         }
 
@@ -74,16 +77,18 @@ class Contacts_Rx(db.Model):
     exp_date = db.Column(db.DateTime, default=datetime.date, nullable=False)
     valid = db.Column(db.Boolean, nullable=False)
     lens_brand = db.Column(db.String, nullable=False)
-    prescription = db.Column(db.String, nullable=False)
-    pres_od = db.Column(db.String, nullable=False)
+    od_rx = db.Column(db.String, nullable=False)
+    os_rx = db.Column(db.String, nullable=False)
+    pres_doc = db.Column(db.String, nullable=False)
     patient_id = db.Column(db.Integer, db.ForeignKey('patients.id'), nullable=False)
 
-    def __init__(self, exp_date: datetime, valid: bool, lens_brand: str, prescription: str, pres_od: str, patient_id: str):
+    def __init__(self, exp_date: datetime, valid: bool, lens_brand: str, od_rx: str, os_rx: str, pres_doc: str, patient_id: str):
         self.exp_date = exp_date
         self.valid = valid
         self.lens_brand = lens_brand
-        self.prescription = prescription
-        self.pres_od = pres_od
+        self.od_rx = od_rx
+        self.os_rx = os_rx
+        self.pres_doc = pres_doc
         self.patient_id = patient_id
 
     def serialize(self):
@@ -92,8 +97,9 @@ class Contacts_Rx(db.Model):
             'exp_date': self.exp_date,
             'valid': self.valid,
             'lens_brand': self.lens_brand,
-            'prescription': self.prescription,
-            'pres_od': self.pres_od,
+            'od_rx': self.od_rx,
+            'os_rx': self.os_rx,
+            'pres_doc': self.pres_doc,
             'patient_id': self.patient_id
         }
 
