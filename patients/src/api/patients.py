@@ -25,9 +25,7 @@ def create():
         name=request.json['name'],
         date_of_birth=request.json['date_of_birth'],
         phone_number=request.json['phone_number'],
-        email=request.json['email'],
-        cl_rx=request.json['cl_rx'],
-        s_rx=request.json['s_rx']
+        email=request.json['email']
     )
     db.session.add(p)
     db.session.commit()

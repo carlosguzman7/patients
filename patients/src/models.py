@@ -11,14 +11,15 @@ class Patient(db.Model):
     date_of_birth = db.Column(db.DateTime, default=datetime.date, unique=False, nullable=False)
     phone_number = db.Column(db.Integer, unique=False, nullable=False)
     email = db.Column(db.String(40), unique=False, nullable=True)
-    current_clrx = db.relationship('Contacts_Rx', backref='patient')
-    current_srx = db.relationship('Glasses_Rx', backref='patient')
+    contacts = db.relationship('Contacts_Rx', backref='patient')
+    glasses = db.relationship('Glasses_Rx', backref='patient')
 
-    def __init__(self, name: str, date_of_birth: datetime, phone_number: int, email: str): #cl_rx: int, #s_rx: int
+    def __init__(self, name: str, date_of_birth: datetime, phone_number: int, email: str):
         self.name = name
         self.date_of_birth = date_of_birth
         self.phone_number = phone_number
         self.email = email
+    
         
     def serialize(self):
         return {
