@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, abort, request
-from ..models import Patient, Contacts_Rx, Glasses_Rx, db
+from ..models import Patient, db
 
 bp = Blueprint('patients', __name__, url_prefix='/patients')
 

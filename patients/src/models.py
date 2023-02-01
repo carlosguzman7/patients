@@ -1,5 +1,6 @@
 import datetime
 from flask_sqlalchemy import SQLAlchemy
+from flask import jsonify
 
 db = SQLAlchemy()
 
@@ -19,7 +20,6 @@ class Patient(db.Model):
         self.date_of_birth = date_of_birth
         self.phone_number = phone_number
         self.email = email
-    
         
     def serialize(self):
         return {
